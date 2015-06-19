@@ -1,0 +1,17 @@
+{
+  "name": "@cellarlabs/rbm-readline-commands",
+  "version": "0.0.1",
+  "private": false,
+  "main": "index.js",
+  "dependencies": {
+  },
+  "engines": {
+    "node": ">0.10"
+  },
+  "licenses": [
+    {
+      "type": "GPL-3.0",
+      "url": "http://www.gnu.org/licenses/gpl-3.0.txt"
+    }
+  ]
+}
