@@ -1,9 +1,18 @@
 {
   "name": "@cellarlabs/rbm-readline-commands",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "private": false,
-  "main": "index.js",
+  "main": "parser.js",
   "dependencies": {
+    "underscore": "",
+    "@cellarlabs/rbm-keyvalue-parser": ">=0.1.1"
+  },
+  "devDependencies": {
+    "mocha": "",
+    "should": ""
+  },
+  "scripts": {
+    "test": "mocha"
   },
   "engines": {
     "node": ">0.10"
