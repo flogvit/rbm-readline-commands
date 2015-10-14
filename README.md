@@ -45,7 +45,3 @@ parser.init(commands);
 
 
 ```
-
-The commands are build up of parameters. If a parameter is a normal string, it is required to that point in
-the tree. If a node has a "_", it can be terminated at that point. If a string has <> around, it is a
-required named parameter. It will be named accordingly. And if a parameter has [] around, it is optional
