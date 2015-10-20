@@ -97,7 +97,7 @@ var commands = {
 parser.init(commands);
 console.log(util.inspect(parser.tree, false, null));
 
-describe('Check Parser', function () {
+describe('Check Expand', function () {
   var its = {
     'madule': [
       new Error('Unknown command'),
@@ -125,8 +125,14 @@ describe('Check Parser', function () {
       }
     ],
     'module.start id=test': [
-        new Error('Unknown command'),
-      {expands: []}
+        null,
+      {
+        command: 'module.start',
+        params: {
+          id: 'test'
+        },
+        expands: ['module.start id=test']
+      }
     ],
     'module.start name=test node=node1': [
       null,
@@ -170,14 +176,28 @@ describe('Check Parser', function () {
         expands: ['module.add name="test module" type=node params url=mongodb://localhost/test']
       }
     ]
-/*    ,
+    ,
     'module.start na': [
       null,
       {
         command: 'module.start',
-        expands: ['module.start name=']
+        params: {
+          name: {}
+        },
+        expands: ['module.start name']
       }
     ],
+    'module.start na=sudoku': [
+        null,
+      {
+        command: 'module.start',
+        params: {
+          name: 'sudoku'
+        },
+        expands: [ 'module.start name=sudoku']
+      }
+    ]
+    /*,
     'module.start name=su': [
         null,
       {

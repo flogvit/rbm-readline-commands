@@ -40,10 +40,13 @@ Parser.prototype.expandCommand = function (pstring, cb) {
   result.expands = [];
   var command = pstring.hasNext() ? pstring.next()[0] : '';
   if (!pstring.hasNext()) {
+    // We only have a command on the line.
     if (this.commands.hasCommand(command)) {
+      // It's legal
       result.command = command;
       result.expands.push(command);
     } else {
+      // It's not a legal command. Try to expand it to see if its only a part
       result.expands = this.commands.expandCommand(command);
       if (result.expands.length===0)
         return cb(new Error('Unknown command'), result);
@@ -51,9 +54,11 @@ Parser.prototype.expandCommand = function (pstring, cb) {
     return cb(null, result);
   }
   if (!this.commands.hasCommand(command)) {
+    // We had a parameter, and the command was unknown
     return cb(new Error('Unknown command'), result);
   }
   result.command = command;
+  // We have a legal command and checking the parameters
   this.expandParams(pstring, command, function(err, res, expanded) {
     result.params = res;
     result.expands.push(expanded);

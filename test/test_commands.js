@@ -12,6 +12,7 @@ var should = require('should');
 require('assert');
 var _ = require('underscore');
 var Commands = require('../lib/commands.js');
+var util = require('util');
 
 describe('Check Commands', function () {
   // First is command
@@ -39,7 +40,7 @@ describe('Check Commands', function () {
         }
       },
         false
-    ],
+    ], /*
     'standard optional': [
       {
         'foo.bar': {
@@ -266,6 +267,58 @@ describe('Check Commands', function () {
         }
       },
         false
+    ] */
+    'with all': [
+      {
+        'foo.bar': {
+          mandatory: {
+            test: {
+              desc: 'test',
+              type: 'string'
+            },
+            test2: {
+              desc: 'test2',
+              type: 'array'
+            },
+            test3: {
+              mandatory: {
+                test: {
+                  desc: 'test',
+                  type: 'number'
+                },
+                test2: {
+                  desc: 'test',
+                  type: 'number'
+                }
+              }
+            },
+            '/test[4]/': {
+              desc: 'test',
+              type: 'string'
+            },
+            test5: [
+              {
+                mandatory: {
+                  test: {
+                    desc: 'test',
+                    type: 'number'
+                  }
+                }
+              }
+            ]
+          },
+          optional: {
+            '/test[6]/': {
+              desc: 'test',
+              type: 'string'
+            },
+            test7: {
+              desc: 'test',
+              type: 'boolean'
+            }
+          }
+        }
+      }
     ]
   }
 
@@ -281,7 +334,12 @@ describe('Check Commands', function () {
       if (its[parse].length>2) {
         should(com.error).equal(its[parse][2]);
       }
-      com.commandParams.should.eql(its[parse][1]);
+//      com.commandParams.should.eql(its[parse][1]);
+      console.log(util.inspect(com, {colors: true, depth: null}));
+/*      console.log(com);
+      console.log(com.commands['foo.bar'].params);
+      console.log(com.commands['foo.bar'].definition);
+      console.log(com.commands['foo.bar']._error); */
        done();
     });
   });
